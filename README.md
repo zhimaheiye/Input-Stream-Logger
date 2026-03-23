@@ -141,10 +141,11 @@ restore_clip = True         # 模拟粘贴后是否恢复剪贴板
 ![Voice Input UI](assets/voice_input_ui.png)
 
 将语音识别内容抓取到刚才打字的日志中：
-文件路径：
-D:\Input-Stream-Logger\CapsWriter-Offline\util\client\output\result_processor.py
 
-result_processor.py中的代码如下（这里引用文件）
+- **仓库文件路径**：[`CapsWriter-Offline/util/client/output/result_processor.py`](./CapsWriter-Offline/util/client/output/result_processor.py) (点击可直接跳转)
+- **本地路径参考**：`D:\CapsWriter-Offline\util\client\output\result_processor.py`
+
+请使用仓库中的代码 **全部覆盖** 你本地的同名文件即可。
 
 
 顺便一提，我目前的配置会导致每段语音都被录制并一条一条的存放在格式类似D:\CapsWriter-Offline\2026的文件夹下，按照月份分类。占空间很大可以定期去删掉
