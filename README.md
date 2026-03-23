@@ -17,7 +17,7 @@
 ## 1. 前置准备
 
 
- ### Rime (小狼毫) 安装
+### Rime (小狼毫) 安装
 
 - **下载地址**：[Rime Weasel Release](https://github.com/rime/weasel/releases)
 
@@ -71,4 +71,24 @@ local path = "D:\\my_log\\" .. date .. ".txt"
 ```
 
 我们将路径修改为你想要的文件夹（例如 `C:\\Users\\User\\Documents\\`）。
-**注意：Windwos路径中的反斜杠 `\` 需要写成双斜杠 `\\` 转义！**
+**注意：Windows路径中的反斜杠 `\` 需要写成双斜杠 `\\` 转义！**
+
+#### **3. 生效配置：重新部署**
+
+完成以上文件替换与路径修改后，为了让配置生效，你需要：
+1. 在 Windows 任务栏右下角找到 Rime（小狼毫）图标。
+2. **右键** 点击图标，选择 **“重新部署” (Redeploy)**。
+3. 等待几秒钟，直到提示部署成功。
+
+![Redeploy](assets/redeploy.png)
+
+---
+
+## 3. 最终效果展示
+
+配置成功后，你在电脑上输入的每一段文字都会被实时记录到你指定的日志文件中。
+
+**日志示例：**
+
+![Log Example](assets/log_example.png)
+
