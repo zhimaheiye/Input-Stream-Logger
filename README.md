@@ -23,9 +23,11 @@
 
 - **安装建议**：建议安装到非系统盘（如 `D:\Rime_Config`），方便后续管理配置。
 
-- **输入方案**：初步配置选“朙月拼音·简化字”即可，本项目后续配置文件也是基于这个选项
+![Rime Install](assets/rime_install_options.png)
 
-  
+- **输入方案**：初步配置选“朙月拼音·简化字”即可，本项目后续配置文件也是基于这个选项。
+
+![Input Schema](assets/input_schema.png)
 
 <details>
 
@@ -92,3 +94,69 @@ local path = "D:\\my_log\\" .. date .. ".txt"
 
 ![Log Example](assets/log_example.png)
 
+
+## 3. 语音模块：CapsWriter-Offline
+为了解决“不想打字”时的输入问题，引入了本地语音识别。
+
+- **工具介绍**：GitHub 开源工具，利用 Whisper 模型本地识别。
+- **操作流程**：
+    1. 按住 `CapsLock` 说话。
+    2. 松开，几百毫秒内转文字。
+    3. **关键点**：通过模拟键盘输入上屏，所以能被 Rime 的 Lua 脚本完美抓取。
+## 免责声明与致谢 (Credits)
+
+本项目作为 [CapsWriter-Offline](https://github.com/HaujetZhao/CapsWriter-Offline) 的非官方配置补丁存在。
+
+- **核心功能**：CapsWriter 软件本体版权归原作者 **[HaujetZhao](https://github.com/HaujetZhao)** 所有。
+- **本仓库内容**：仅包含针对特定需求的 Rime 配置文件与 Python 脚本修改片段。
+- **使用方式**：本项目不分发 CapsWriter 软件实体，请用户自行前往原仓库下载。
+
+#### **下载和配置**
+- **下载链接**：[Releases · HaujetZhao/CapsWriter-Offline](https://github.com/HaujetZhao/CapsWriter-Offline/releases)
+- **文件夹结构**：下载并解压后，目录结构如下所示：
+
+![CapsWriter Structure](assets/capswriter_structure.png)
+
+1. **运行程序**：运行目录底部的两个 `.exe` 文件（Server 和 Client）。
+2. **下载模型**：初次运行需要下载模型文件。
+
+![Model Files](assets/model_files.png)
+
+3. **获取模型**：可以从作者提供的百度网盘下载对应模型（如 `Fun-ASR-Nano`）。
+
+![Baidu Pan Link](assets/baidu_pan_link.png)
+
+解压完之后路径看起来应该是这样的：
+D:\CapsWriter-Offline\models\Fun-ASR-Nano\Fun-ASR-Nano-GGUF
+
+为了让语音输入的内容也被抓取到日志里，我们需要修改配置文件config_client.py
+paste这里需要是False
+```
+threshold    = 0.3          # 快捷键触发阈值（秒）
+paste        = False        # 是否以写入剪切板然后模拟 Ctrl-V 粘贴的方式输出结果
+restore_clip = True         # 模拟粘贴后是否恢复剪贴板
+```
+**语音输入界面展示：**
+
+![Voice Input UI](assets/voice_input_ui.png)
+
+将语音识别内容抓取到刚才打字的日志中：
+文件路径：
+D:\Input-Stream-Logger\CapsWriter-Offline\util\client\output\result_processor.py
+
+result_processor.py中的代码如下（这里引用文件）
+
+
+顺便一提，我目前的配置会导致每段语音都被录制并一条一条的存放在格式类似D:\CapsWriter-Offline\2026的文件夹下，按照月份分类。占空间很大可以定期去删掉
+倒是可以通过某种筛选直接作为训练个人ai语音的素材了，还省去的文字校对的工作。不过这个暂时不管。
+
+
+**日志混合展示：**
+
+![Mixed Log](assets/mixed_log.png)
+
+> **PS**：开机时首次使用的延时较久是正常的，模型加载完之后后续的识别就很快了。
+
+
+## 5. 后端处理：日志清洗与 AI 知识库构建
+（待补充）
